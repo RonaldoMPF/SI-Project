@@ -1,9 +1,21 @@
 package br.edu.ufcg.computacao.si1.model;
 
-import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 
 /**
  * Created by Marcus Oliveira on 08/12/16.
@@ -12,6 +24,9 @@ import java.util.Date;
 @Table(name="tb_anuncio")
 public class Anuncio {
 
+//	@Autowired
+//	private UsuarioRepository usuarioRepositorio;
+	
     private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
 
 
@@ -36,7 +51,30 @@ public class Anuncio {
 
     @Column(name = "tipo", nullable = false)
     private String tipo;
+    
+    @Column(name = "criadorNome", nullable = false)
+    private String criadorNome;
+    
+    @Column(name = "criadorEmail", nullable = false)
+    private String  criadorEmail;
 
+    public Anuncio(String titulo, double preco, String tipo, String criadorNome, String criadorEmail){
+        this.titulo = titulo;
+        this.dataDeCriacao = new Date();
+        this.preco = preco;
+        this.nota = "";
+        this.tipo = tipo;
+        this.criadorNome = criadorNome;
+        this.criadorEmail = criadorEmail;
+    }
+    
+//    private String getEmailCriador(){
+//        Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Usuario usuarioAtual = usuarioRepositorio.findByEmail(((UserDetails) usuarioLogado).getUsername());
+//        
+//        return usuarioAtual.getEmail();
+//    }
+    
     public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
@@ -108,7 +146,23 @@ public class Anuncio {
         this.tipo = tipo;
     }
 
-    @Override
+    public String getCriadorNome() {
+		return criadorNome;
+	}
+
+	public void setCriadorNome(String criadorNome) {
+		this.criadorNome = criadorNome;
+	}
+
+	public String getCriadorEmail() {
+		return criadorEmail;
+	}
+
+	public void setCriadorEmail(String criadorEmail) {
+		this.criadorEmail = criadorEmail;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Anuncio)) return false;
