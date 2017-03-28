@@ -52,6 +52,11 @@ public class UsuarioServiceImpl implements UsuarioService{
         System.out.println(email + "estah sendo retornado");
         return Optional.ofNullable(usuarioRepository.findByEmail(email));
     }
+    
+    @Override
+    public Usuario getUserByEmail(String email) {
+        return this.getByEmail(email).get();
+    }
 
     @Override
     public Collection<Usuario> getAll() {

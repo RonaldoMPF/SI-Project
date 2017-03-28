@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 public class UsuarioForm {
     @NotNull(message = "O nome não pode ser nulo.")
     @NotEmpty(message = "O nome não pode ser vazio.")

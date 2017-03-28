@@ -22,4 +22,6 @@ public interface AnuncioService {
 
     boolean delete(Long id);
 
+	Anuncio getOneById(Long id);
+
 }

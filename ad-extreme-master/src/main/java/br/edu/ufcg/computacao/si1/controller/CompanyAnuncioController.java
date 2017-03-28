@@ -1,8 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
-import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +20,6 @@ public class CompanyAnuncioController {
     
     @Autowired
     private AnuncioController anuncioController;
-    
     
     private String role;
     
@@ -57,6 +54,11 @@ public class CompanyAnuncioController {
 //        return model;
     }
 
+    @RequestMapping(value = "/company/listar/meus_anuncios", method = RequestMethod.GET)
+    public ModelAndView getPageListarMeusAnuncios(){
+    	return this.anuncioController.getPageListarMeusAnuncios(this.role);
+    }
+    
     @RequestMapping(value = "/company/cadastrar/anuncio", method = RequestMethod.POST)
     public ModelAndView cadastroAnuncio(@Valid AnuncioForm anuncioForm, BindingResult result, RedirectAttributes attributes){
     	return this.anuncioController.cadastroAnuncio(anuncioForm, result, attributes, role);

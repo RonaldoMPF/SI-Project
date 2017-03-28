@@ -18,4 +18,6 @@ public interface UsuarioService {
     boolean update(Usuario usuario);
 
     boolean delete(Long id);
+
+	Usuario getUserByEmail(String email);
 }

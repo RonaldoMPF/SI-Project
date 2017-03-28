@@ -8,6 +8,16 @@
 </head>
 <th:block layout:fragment="conteudo">
     <div class="col-md-offset-2 col-md-8">
+        <div class="alert alert-danger alert-dismissible" role="alert" th:if="${not #strings.isEmpty(msgCompraFalha)}">
+        	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i></strong>
+            <span th:text="${msgCompraFalha}"></span>
+        </div>
+        <div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(msgCompraSucesso)}">
+        	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-check" aria-hidden="true"></i></strong>
+            <span th:text="${msgCompraSucesso}"></span>
+        </div>
         <h1>Anúncios</h1>
         <!-- Text input-->
         <div th:if="${anuncios.isEmpty()}">
@@ -21,6 +31,7 @@
                     <th>Postado</th>
                     <th>Criador</th>
                     <th align="right">Preço</th>
+                    <th></th>
                 </tr>
 
                 <th:block th:each="item : ${anuncios}">
@@ -30,6 +41,12 @@
                         <td th:text="${item.dataDeCriacao}"> - </td>
                         <td th:text = "${item.criadorNome}"> - </td>
                         <td align="center" th:text="${'R$ ' + #numbers.formatDecimal(item.preco, 0, 'COMMA', 2, 'POINT')}">0.00</td>
+                    	<td>
+                    		<form th:action="@{comprar}" method="post">
+                            	<input type="hidden" th:value="${item._id}" name="idAnuncio"/>
+                                <button type="submit" class="btn btn-success">Comprar</button>
+                            </form>
+                    	</td>
                     </tr>
                 </th:block>
             </table>

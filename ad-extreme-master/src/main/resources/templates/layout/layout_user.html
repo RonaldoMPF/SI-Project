@@ -33,6 +33,7 @@
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/user/cadastrar/anuncio}">Cadastrar</a></li>
                         <li><a th:href="@{/user/listar/anuncios}">Todos os Anúncios</a></li>
+                        <li><a th:href="@{/user/listar/meus_anuncios}">Meus Anúncios</a></li>
                     </ul>
                     
                 </li>
@@ -57,8 +58,7 @@
 	<center>
 		<strong>Bem vindo!</strong>
 		<h1 th:text="${UsuarioAtualNome}"></h1>
-		<strong>Saldo R$:</strong>
-		<h1 th:text="${saldo}"></h1>
+
 	</center>
 </board>
 <!-- end menu -->

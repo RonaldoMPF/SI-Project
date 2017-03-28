@@ -1,9 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
-import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
-import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,20 +12,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-public class An {
-
-//    @Autowired
-//    private AnuncioServiceImpl anuncioService;
-//
-//    @Autowired
-//    private AnuncioRepository anuncioRep;
+public class UserAnuncioController {
     
     @Autowired
     private AnuncioController anuncioController;
     
     private String role;
     
-    public An() {
+    public UserAnuncioController() {
 		super();
 		this.anuncioController = new AnuncioController();
 		this.role = "user";
@@ -58,6 +49,11 @@ public class An {
 //
 //        return model;
     }
+    
+    @RequestMapping(value = "/user/listar/meus_anuncios", method = RequestMethod.GET)
+    public ModelAndView getPageListarMeusAnuncios(){
+    	return this.anuncioController.getPageListarMeusAnuncios(this.role);
+    }
 
     //Bad smell
     @RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
@@ -77,6 +73,5 @@ public class An {
 //        attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
 //        return new ModelAndView("redirect:/user/cadastrar/anuncio");
     }
-
 
 }

@@ -40,6 +40,12 @@ public class AnuncioServiceImpl implements AnuncioService {
         /*aqui recuperamos o anuncio pelo seu id*/
         return Optional.ofNullable(anuncioRepository.findOne(id));
     }
+    
+    @Override
+    public Anuncio getOneById(Long id) {
+        /*aqui recuperamos o anuncio pelo seu id*/
+        return this.getById(id).get();
+    }
 
     @Override
     public Collection<Anuncio> get(String tipo) {

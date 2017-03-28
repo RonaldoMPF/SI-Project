@@ -17,7 +17,7 @@
 <!-- init menu -->
 <div id="menu" class="navbar navbar-default " role="navigation">
     <div class="container-fluid">
-        <div class="navbar-header"><a class="navbar-brand" th:href="@{/}"><i class="fa fa-usd" aria-hidden="true"></i>
+        <div class="navbar-header"><a class="navbar-brand" th:href="@{/company}"><i class="fa fa-usd" aria-hidden="true"></i>
             ad-extreme</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
                 <span class="sr-only">Toggle navigation</span>
@@ -26,6 +26,7 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
+        
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
@@ -34,8 +35,16 @@
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/company/cadastrar/anuncio}">Cadastrar</a></li>
                         <li><a th:href="@{/company/listar/anuncios}">Todos os Anúncios</a></li>
+                        <li><a th:href="@{/company/listar/meus_anuncios}">Meus Anúncios</a></li>
                     </ul>
                 </li>
+                
+                <li><a href="#">Saldo R$:</a></li>
+                <li>
+                	<a th:text="${saldo}"></a>
+            	</li>
+            	
+            	
             </ul>
             <!--
             <ul class="nav navbar-nav navbar-left">
@@ -65,6 +74,13 @@
         </div>
     </div>
 </div>
+<board>
+	<center>
+		<strong>Bem vindo!</strong>
+		<h1 th:text="${UsuarioAtualNome}"></h1>
+
+	</center>
+</board>
 <!-- end menu -->
 <div class="container-fluid">
     <div class="row">

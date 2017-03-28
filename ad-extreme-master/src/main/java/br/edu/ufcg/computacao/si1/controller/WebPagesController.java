@@ -39,7 +39,7 @@ public class WebPagesController {
         Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioAtual = usuarioRepositorio.findByEmail(((UserDetails) usuarioLogado).getUsername());
         model.addObject("saldo",usuarioAtual.getSaldo());
-        model.addObject("UsuarioAtualNome", usuarioAtual.getN());
+        model.addObject("UsuarioAtualNome", usuarioAtual.getNome());
         return model;
     }
 
@@ -47,7 +47,10 @@ public class WebPagesController {
     public ModelAndView getPageIndexCompany(){
         ModelAndView model = new ModelAndView();
         model.setViewName("company/index");
-
+        Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuarioAtual = usuarioRepositorio.findByEmail(((UserDetails) usuarioLogado).getUsername());
+        model.addObject("saldo",usuarioAtual.getSaldo());
+        model.addObject("UsuarioAtualNome", usuarioAtual.getNome());
         return model;
     }
 }

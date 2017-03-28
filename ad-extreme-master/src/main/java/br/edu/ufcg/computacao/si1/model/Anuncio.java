@@ -11,12 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
-
 /**
  * Created by Marcus Oliveira on 08/12/16.
  */
@@ -27,7 +21,7 @@ public class Anuncio {
 //	@Autowired
 //	private UsuarioRepository usuarioRepositorio;
 	
-    private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
+//    private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
 
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
