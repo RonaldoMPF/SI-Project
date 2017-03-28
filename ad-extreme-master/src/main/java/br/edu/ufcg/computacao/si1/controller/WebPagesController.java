@@ -43,8 +43,8 @@ public class WebPagesController {
         return model;
     }
 
-    @RequestMapping(value = "/company", method = RequestMethod.GET)
-    public ModelAndView getPageIndexCompany(){
+   @RequestMapping(value = "/company", method = RequestMethod.GET)
+   public ModelAndView getPageIndexCompany(){
         ModelAndView model = new ModelAndView();
         model.setViewName("company/index");
         Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -31,16 +31,18 @@ public class CompanyNegotiation {
 		Anuncio anuncio = anuncioService.getOneById(idAnuncio);
 		Usuario comprador = this.getUsuarioAtual();
 		Usuario vendendor = usuarioService.getUserByEmail(anuncio.getCriadorEmail());
+		double precoAnuncio = anuncio.getPreco();
 		
 		if (comprador.equals(vendendor)) {
 			attributes.addFlashAttribute("msgCompraFalha", "Você não pode comprar seu própio produto!");
 		}
 		else if (anuncio.getTipo().equals("emprego")) {
+			comprador.debitar(precoAnuncio);
+			vendendor.creditar(precoAnuncio);
 			return this.compraServico(anuncio);
 			//attributes.addFlashAttribute("msgCompraFalha", "Você não pode comprar um serviço!");
 		}
-		else {
-			double precoAnuncio = anuncio.getPreco();
+		else{
 			
 			comprador.debitar(precoAnuncio);
 			vendendor.creditar(precoAnuncio);
@@ -64,6 +66,9 @@ public class CompanyNegotiation {
 
         return model;
 	}
+	
+	
+	
 	
     private Usuario getUsuarioAtual(){
     	Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();

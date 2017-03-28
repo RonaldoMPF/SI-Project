@@ -52,6 +52,7 @@ public class UserNegociation {
         return new ModelAndView("redirect:/user/listar/anuncios");
 	}
 	
+	
     private Usuario getUsuarioAtual(){
     	Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Usuario usuarioAtual = usuarioService.getUserByEmail(((UserDetails) usuarioLogado).getUsername());
