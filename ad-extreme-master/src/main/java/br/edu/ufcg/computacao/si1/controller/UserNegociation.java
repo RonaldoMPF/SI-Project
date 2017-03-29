@@ -31,16 +31,20 @@ public class UserNegociation {
 		Anuncio anuncio = anuncioService.getOneById(idAnuncio);
 		Usuario comprador = this.getUsuarioAtual();
 		Usuario vendendor = usuarioService.getUserByEmail(anuncio.getCriadorEmail());
+		double precoAnuncio = anuncio.getPreco();
 		
 		if (comprador.equals(vendendor)) {
 			attributes.addFlashAttribute("msgCompraFalha", "Você não pode comprar seu própio produto!");
 		}
 		else if (anuncio.getTipo().equals("emprego")) {
-			attributes.addFlashAttribute("msgCompraFalha", "Você não pode comprar um serviço!");
-		}
-		else {
-			double precoAnuncio = anuncio.getPreco();
+			comprador.debitar(precoAnuncio);
+			vendendor.creditar(precoAnuncio);
+			usuarioService.update(vendendor);
+			usuarioService.update(comprador);
 			
+			return this.compraServico(anuncio);
+		}
+		else {			
 			comprador.debitar(precoAnuncio);
 			vendendor.creditar(precoAnuncio);
 			vendendor.retiraAnuncio(idAnuncio);
@@ -52,6 +56,17 @@ public class UserNegociation {
         return new ModelAndView("redirect:/user/listar/anuncios");
 	}
 	
+	@RequestMapping(value = "/user/agendamentoServico", method = RequestMethod.POST)
+	public ModelAndView compraServico(Anuncio anuncio){
+		
+        ModelAndView model = new ModelAndView();
+
+        model.addObject("agendamento", anuncio);
+
+        model.setViewName("user/agendamentoServico");
+
+        return model;
+	}
 	
     private Usuario getUsuarioAtual(){
     	Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();

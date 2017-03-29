@@ -39,8 +39,10 @@ public class CompanyNegotiation {
 		else if (anuncio.getTipo().equals("emprego")) {
 			comprador.debitar(precoAnuncio);
 			vendendor.creditar(precoAnuncio);
+			usuarioService.update(vendendor);
+			usuarioService.update(comprador);
+			
 			return this.compraServico(anuncio);
-			//attributes.addFlashAttribute("msgCompraFalha", "Você não pode comprar um serviço!");
 		}
 		else{
 			
@@ -67,16 +69,10 @@ public class CompanyNegotiation {
         return model;
 	}
 	
-	
-	
-	
     private Usuario getUsuarioAtual(){
     	Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Usuario usuarioAtual = usuarioService.getUserByEmail(((UserDetails) usuarioLogado).getUsername());
 		
 		return usuarioAtual;
     }
-	
-
-	
 }

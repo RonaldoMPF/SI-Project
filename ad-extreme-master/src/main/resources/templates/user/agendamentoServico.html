@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout/layout_user">
+<head>
+    <title>.:: ad-extreme ::. - user</title>
+</head>
+<th:block layout:fragment="conteudo">
+<div class="container">
+	<div class="col-md-offset-2 col-md-8">
+		<center>
+			<legend>Insira a Data e Hora para agendar o serviço</legend>
+		
+			<fieldset>
+				
+				<div class="form-group">
+    				<label class="col-md-4 control-label" for="data">Data</label>
+        			<div class="col-md-4">
+        	  			<input type="text" placeholder="DD/MM/AAAA" class="form-control input-md" required="required"/>
+        			</div>
+   				</div>
+   				
+   				<br></br>
+   			
+   				<div class="form-group">
+    				<label class="col-md-4 control-label" for="hora">Hora</label>
+        			<div class="col-md-4">
+        	  			<input type="text" placeholder="HH:MM" class="form-control input-md" required="required"/>
+        			</div>
+   				</div>
+   				
+   				<br></br>
+   				<br></br>
+   				
+				<form th:action="@{/user/listar/anuncios}" method="get">
+                	<button type="submit" class="btn btn-primary">Agendar</button>
+                </form>
+			</fieldset>
+   		</center>
+	</div>
+</div>
+</th:block>
+</html>

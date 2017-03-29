@@ -28,26 +28,11 @@ public class UserAnuncioController {
 	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
     public ModelAndView getPageCadastrarAnuncio(AnuncioForm anuncioForm){
     	return this.anuncioController.getPageCadastrarAnuncio(anuncioForm, this.role);
-    	
-//        ModelAndView model = new ModelAndView();
-//
-//        model.addObject("tipos", anuncioForm.getTipos());
-//        model.setViewName("user/cadastrar_anuncio");
-//
-//        return model;
     }
 
     @RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
     public ModelAndView getPageListarAnuncios(){
     	return this.anuncioController.getPageListarAnuncios(this.role);
-    	
-//        ModelAndView model = new ModelAndView();
-//
-//        model.addObject("anuncios", anuncioRep.findAll());
-//
-//        model.setViewName("user/listar_anuncios");
-//
-//        return model;
     }
     
     @RequestMapping(value = "/user/listar/meus_anuncios", method = RequestMethod.GET)
@@ -55,23 +40,8 @@ public class UserAnuncioController {
     	return this.anuncioController.getPageListarMeusAnuncios(this.role);
     }
 
-    //Bad smell
     @RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
     public ModelAndView cadastroAnuncio(@Valid AnuncioForm anuncioForm, BindingResult result, RedirectAttributes attributes){
     	return this.anuncioController.cadastroAnuncio(anuncioForm, result, attributes, role);
-//        if(result.hasErrors()){
-//            return getPageCadastrarAnuncio(anuncioForm);
-//        }
-//
-//        Anuncio anuncio = new Anuncio(anuncioForm.getTitulo(), anuncioForm.getPreco(), anuncioForm.getTipo());
-////        anuncio.setTitulo(anuncioForm.getTitulo());
-////        anuncio.setPreco(anuncioForm.getPreco());
-////        anuncio.setTipo(anuncioForm.getTipo());
-//
-//        anuncioService.create(anuncio);
-//
-//        attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
-//        return new ModelAndView("redirect:/user/cadastrar/anuncio");
     }
-
 }

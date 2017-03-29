@@ -62,7 +62,6 @@ public class AnuncioController {
         return model;
     }
 
-    //Bad smell
     public ModelAndView cadastroAnuncio(@Valid AnuncioForm anuncioForm, BindingResult result, RedirectAttributes attributes, String role){
         if(result.hasErrors()){
             return getPageCadastrarAnuncio(anuncioForm, role);
@@ -70,9 +69,6 @@ public class AnuncioController {
 
         Anuncio anuncio = new Anuncio(anuncioForm.getTitulo(), anuncioForm.getPreco(),
         		anuncioForm.getTipo(), this.getNomeCriador(), this.getEmailCriador());
-//        anuncio.setTitulo(anuncioForm.getTitulo());
-//        anuncio.setPreco(anuncioForm.getPreco());
-//        anuncio.setTipo(anuncioForm.getTipo());
 
         anuncioService.create(anuncio);
         Usuario usuarioAtual = this.getUsuarioAtual();
