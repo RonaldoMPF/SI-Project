@@ -69,6 +69,20 @@ public class CompanyNegotiation {
         return model;
 	}
 	
+	@RequestMapping(value = "/company/listar/deletar", method = RequestMethod.POST)
+	public ModelAndView deletar(RedirectAttributes attributes,
+    		@RequestParam(value = "idAnuncio") long idAnuncio){
+		
+		Usuario usuarioAtual = this.getUsuarioAtual();
+		usuarioAtual.retiraAnuncio(idAnuncio);
+		anuncioService.delete(idAnuncio);
+		usuarioService.update(usuarioAtual);
+		
+        attributes.addFlashAttribute("deletar", "Anuncio deletado com sucesso!");
+		
+		return new ModelAndView("redirect:/company/listar/meus_anuncios");
+	}
+	
     private Usuario getUsuarioAtual(){
     	Object usuarioLogado =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Usuario usuarioAtual = usuarioService.getUserByEmail(((UserDetails) usuarioLogado).getUsername());

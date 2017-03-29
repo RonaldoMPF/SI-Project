@@ -8,6 +8,11 @@
 </head>
 <th:block layout:fragment="conteudo">
     <div class="col-md-offset-2 col-md-8">
+        <div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(deletar)}">
+        	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-check" aria-hidden="true"></i></strong>
+            <span th:text="${deletar}"></span>
+        </div>
         <h1>Anúncios da Empresa</h1>
         <!-- Text input-->
         <div th:if="${meus_anuncios.isEmpty()}">
@@ -20,6 +25,7 @@
                     <th>Tipo</th>
                     <th>Postado</th>
                     <th align="right">Preço</th>
+                    <th></th>
                 </tr>
 
                 <th:block th:each="item : ${meus_anuncios}">
@@ -28,6 +34,12 @@
                         <td th:text="${#strings.toUpperCase(item.tipo)}"> - </td>
                         <td th:text="${item.dataDeCriacao}"> - </td>
                         <td align="center" th:text="${'R$ ' + #numbers.formatDecimal(item.preco, 0, 'COMMA', 2, 'POINT')}">0.00</td>
+                        <td>
+                    		<form th:action="@{deletar}" method="post">
+                            	<input type="hidden" th:value="${item._id}" name="idAnuncio"/>
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                    	</td>
                     </tr>
                 </th:block>
             </table>
