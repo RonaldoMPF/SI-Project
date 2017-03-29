@@ -66,16 +66,22 @@ public class AnuncioController {
         if(result.hasErrors()){
             return getPageCadastrarAnuncio(anuncioForm, role);
         }
+        
+        if (role.equals("user") && anuncioForm.getTipo().equals("emprego")) {
+        	attributes.addFlashAttribute("mensagemErro", "Pessoa física não pode cadastrar um emprego!");
+        }
+        else {
+            Anuncio anuncio = new Anuncio(anuncioForm.getTitulo(), anuncioForm.getPreco(),
+            		anuncioForm.getTipo(), this.getNomeCriador(), this.getEmailCriador());
 
-        Anuncio anuncio = new Anuncio(anuncioForm.getTitulo(), anuncioForm.getPreco(),
-        		anuncioForm.getTipo(), this.getNomeCriador(), this.getEmailCriador());
+            anuncioService.create(anuncio);
+            Usuario usuarioAtual = this.getUsuarioAtual();
+            usuarioAtual.addListaAnuncios(anuncio.get_id());
+            usuarioService.update(usuarioAtual);
 
-        anuncioService.create(anuncio);
-        Usuario usuarioAtual = this.getUsuarioAtual();
-        usuarioAtual.addListaAnuncios(anuncio.get_id());
-        usuarioService.update(usuarioAtual);
+            attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
+        }
 
-        attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
         return new ModelAndView("redirect:/"+ role +"/cadastrar/anuncio");
     }
     

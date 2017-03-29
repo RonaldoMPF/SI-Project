@@ -14,6 +14,11 @@
                 <strong><i class="fa fa-check" aria-hidden="true"></i></strong>
                 <span th:text="${mensagem}"></span>
             </div>
+            <div class="alert alert-danger alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagemErro)}">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i></strong>
+                <span th:text="${mensagemErro}"></span>
+            </div>
             <form class="form-horizontal" method="post" role="form" th:object="${anuncioForm}" th:action="@{/user/cadastrar/anuncio}">
                 <div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
